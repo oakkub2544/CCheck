@@ -10,11 +10,12 @@ import SwiftUI
 import Firebase
 
 struct SettingView: View {
-    
+    //MARK: - Property
     @State private var showingLoginView = false
     @State private var showingLogoutConfirmation = false
     @Environment(\.presentationMode) var presentationMode
     
+    //MARK: - Body
     var body: some View {
         NavigationStack {
             List {
@@ -74,32 +75,35 @@ struct SettingView: View {
                         }
                     .frame(height: 24)
                 }
-
-                .alert(isPresented: $showingLogoutConfirmation) {
-                    Alert(
-                        title: Text("Confirm Logout"),
-                        message: Text("Are you sure you want to logout?"),
-                        primaryButton: .destructive(Text("Logout")) {
-                            try! Auth.auth().signOut()
-                            showingLoginView = true
-                        },
-                        secondaryButton: .cancel()
-                    )
+            //Popup Confirm Logout
+            .alert(isPresented: $showingLogoutConfirmation) {
+                Alert(
+                    title: Text("Confirm Logout"),
+                    message: Text("Are you sure you want to logout?"),
+                    primaryButton: .destructive(Text("Logout")) {
+                        //Logout
+                        try! Auth.auth().signOut()
+                        showingLoginView = true
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
+            //Header
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Setting")
+                        .font(.title2)
+                        .bold()
                 }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text("Setting")
-                            .font(.title2)
-                            .bold()
-                    }
+            }
+            //Go to Login page
+            .navigationDestination(isPresented: $showingLoginView) {
+                NavigationView {
+                    LoginPageView()
                 }
-                .navigationDestination(isPresented: $showingLoginView) {
-                    NavigationView {
-                        LoginPageView()
-                    }
-                    .navigationBarBackButtonHidden(true)
-                }
-                .frame(height: .infinity)
+                .navigationBarBackButtonHidden(true)
+            }
+            .frame(height: .infinity)
         }//:Navigation
     }
 }

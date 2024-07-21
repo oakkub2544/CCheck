@@ -105,6 +105,15 @@ struct RegisterPageView: View {
                 }, label: {
                     AuthServiceButtonView(text: "Sign up")
                 })
+                //Go to Register Page
+                NavigationLink(
+                    destination: LoginPageView()) {
+                        Text("Sign in")
+                            .font(.system(size: 16))
+                            .foregroundColor(Color("ColorPrimary"))
+                            .padding(.top, 4)
+                            .navigationBarBackButtonHidden(true)
+                }
                 
             }//:VStack
         }//:Navigation

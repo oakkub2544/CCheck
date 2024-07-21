@@ -62,7 +62,7 @@ struct ContentView: View {
                                 .foregroundColor(self.colorize(priority: item.priority ?? "Normal"))
                             // Don't have Category
                             if item.category != nil && item.category != "" {
-                                VStack {
+                                VStack(alignment: .leading) {
                                     Text(item.name ?? "")
                                         .font(.headline)
                                         .fontWeight(.bold)
@@ -70,6 +70,7 @@ struct ContentView: View {
                                     Text(item.category ?? "")
                                         .font(.footnote)
                                         .foregroundColor(.gray)
+                                        .padding(.leading,0)
                                 }
                                 .padding(.leading, 8)
                             } else {
