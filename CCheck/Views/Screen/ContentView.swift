@@ -121,6 +121,21 @@ struct ContentView: View {
                 }
                 .navigationDestination(isPresented: $showingSettingView) {
                     SettingView()
+                        .navigationBarBackButtonHidden(true)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button(action: {
+                                    showingSettingView = false
+                            }) {
+                                HStack {
+                                    Image(systemName: "chevron.backward")
+                                        .foregroundColor(Color("ColorPrimary"))
+                                    Text("Back")
+                                        .foregroundColor(Color("ColorPrimary"))
+                                }
+                            }
+                        }
+                    }
                 }
 
                 //MARK: - No one List
